@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -29,8 +30,6 @@ function Login({ onLogin }) {
           localStorage.setItem("user", JSON.stringify(data.user));
 
           alert("Login successful");
-
-          console.log("ONLOGIN CALLED");
           onLogin();
         } else {
           alert(data.message);
@@ -38,30 +37,44 @@ function Login({ onLogin }) {
       })
       .catch((error) => {
         console.log("Login error:", error);
+        alert("Unable to connect to server");
       });
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="login-page">
+      <div className="login-card">
 
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
+        <div className="login-header">
+          <h1>B2B Order Management</h1>
+          <p>Login to your account</p>
+        </div>
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <div className="login-form">
 
-      <button onClick={loginUser}>
-        Login
-      </button>
+          <label>Username</label>
+          <input
+            type="text"
+            placeholder="Enter username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <button onClick={loginUser}>
+            Login
+          </button>
+
+        </div>
+
+      </div>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2");
@@ -11,10 +13,10 @@ const PORT = 5000;
 // ==================== DATABASE ====================
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "products_db"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
 db.connect((err) => {
@@ -31,7 +33,7 @@ db.connect((err) => {
 app.use(cors());
 app.use(express.json());
 
-const JWT_SECRET = "b2b_order_management_secret";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // ==================== JWT AUTHENTICATION ====================
 

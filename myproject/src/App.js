@@ -17,7 +17,6 @@ function App() {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  // Check JWT token expiration
   useEffect(() => {
     const checkToken = () => {
       const token = localStorage.getItem("token");
@@ -29,7 +28,6 @@ function App() {
 
       try {
         const payload = JSON.parse(atob(token.split(".")[1]));
-
         const currentTime = Math.floor(Date.now() / 1000);
 
         if (payload.exp && payload.exp < currentTime) {
@@ -67,80 +65,184 @@ function App() {
   };
 
   if (!isLoggedIn) {
-    return (
-      <Login
-        onLogin={() => setIsLoggedIn(true)}
-      />
-    );
+    return <Login onLogin={() => setIsLoggedIn(true)} />;
   }
 
   return (
-    <div>
-      <nav>
-        <h2>B2B Order Management</h2>
+    <div className="app-container">
 
-        <div>
+      {/* SIDEBAR */}
+
+      <aside className="sidebar">
+
+        <div className="sidebar-logo">
+          <div className="logo-icon">B2B</div>
+
+          <div>
+            <h2>Order Management</h2>
+            <span>Management System</span>
+          </div>
+        </div>
+
+
+        {/* USER */}
+
+        <div className="sidebar-user">
+
+          <div className="user-avatar">
+            {user?.username?.charAt(0).toUpperCase()}
+          </div>
+
+          <div>
+            <strong>{user?.username}</strong>
+            <span>{user?.role}</span>
+          </div>
+
+        </div>
+
+
+        {/* MENU */}
+
+        <div className="menu-title">
+          MAIN MENU
+        </div>
+
+
+        <div className="sidebar-menu">
+
           <button
+            className={page === "dashboard" ? "menu-item active" : "menu-item"}
             onClick={() => setPage("dashboard")}
           >
+            <span className="menu-icon">📊</span>
             Dashboard
           </button>
 
+
           <button
+            className={page === "products" ? "menu-item active" : "menu-item"}
             onClick={() => setPage("products")}
           >
+            <span className="menu-icon">📦</span>
             Products
           </button>
 
+
           <button
+            className={page === "orders" ? "menu-item active" : "menu-item"}
             onClick={() => setPage("orders")}
           >
+            <span className="menu-icon">🛒</span>
             Orders
           </button>
 
+
           <button
+            className={page === "stock" ? "menu-item active" : "menu-item"}
             onClick={() => setPage("stock")}
           >
+            <span className="menu-icon">📋</span>
             Stock
           </button>
 
+
           {user && user.role === "Admin" && (
             <button
+              className={page === "admin" ? "menu-item active" : "menu-item"}
               onClick={() => setPage("admin")}
             >
+              <span className="menu-icon">👥</span>
               Admin
             </button>
           )}
 
-          <button onClick={handleLogout}>
+        </div>
+
+
+        {/* BOTTOM */}
+
+        <div className="sidebar-bottom">
+
+          <button
+            className="logout-button"
+            onClick={handleLogout}
+          >
+            <span className="menu-icon">🚪</span>
             Logout
           </button>
+
         </div>
-      </nav>
 
-      {page === "dashboard" && (
-        <>
-          <h1>Welcome to B2B Order Management</h1>
+      </aside>
 
-          <p>
-            Manage products, orders, stock and invoices.
-          </p>
 
-          <Dashboard />
-        </>
-      )}
+      {/* MAIN CONTENT */}
 
-      {page === "products" && <Products />}
+      <main className="main-content">
 
-      {page === "orders" && <Orders />}
+        <div className="top-header">
 
-      {page === "stock" && <Stock />}
+          <div>
+            <h1>
+              {page === "dashboard" && "Dashboard"}
+              {page === "products" && "Products"}
+              {page === "orders" && "Orders"}
+              {page === "stock" && "Stock Management"}
+              {page === "admin" && "Admin / Users"}
+            </h1>
 
-      {page === "admin" &&
-        user &&
-        user.role === "Admin" && (
-          <Admin />
-        )}
+            <p>
+              Welcome back, {user?.username}
+            </p>
+          </div>
+
+
+          <div className="header-user">
+
+            <div className="header-avatar">
+              {user?.username?.charAt(0).toUpperCase()}
+            </div>
+
+            <div>
+              <strong>{user?.username}</strong>
+              <span>{user?.role}</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        {/* PAGE CONTENT */}
+
+        <div className="page-content">
+
+          {page === "dashboard" && (
+            <Dashboard />
+          )}
+
+          {page === "products" && (
+            <Products />
+          )}
+
+          {page === "orders" && (
+            <Orders />
+          )}
+
+          {page === "stock" && (
+            <Stock />
+          )}
+
+          {page === "admin" &&
+            user &&
+            user.role === "Admin" && (
+              <Admin />
+            )}
+
+        </div>
+
+      </main>
+
     </div>
   );
 }
