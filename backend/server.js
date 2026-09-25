@@ -14,13 +14,9 @@ const PORT = 5000;
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  database: process.env.DB_NAME
 });
 
 db.connect((err) => {
@@ -37,7 +33,7 @@ db.connect((err) => {
 app.use(cors());
 app.use(express.json());
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = "b2b_order_management_secret";
 
 // ==================== JWT AUTHENTICATION ====================
 
