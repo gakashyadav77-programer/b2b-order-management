@@ -57,60 +57,42 @@ A full-stack B2B Order Management Platform developed using React.js, Node.js, Ex
 
 text
 B2B Order Management Platform
-
 │
 ├── backend
-
 │   ├── server.js
-
 │   ├── package.json
-
 │   └── .env
-
 │
-
 ├── myproject
-
 │   ├── public
-
 │   ├── src
-
 │   │   ├── App.js
-
 │   │   ├── App.css
-
 │   │   ├── Login.js
-
 │   │   ├── Dashboard.js
-
 │   │   ├── Products.js
-
 │   │   ├── Orders.js
-
 │   │   ├── Stock.js
-
 │   │   └── Admin.js
-
-
+│   │
 │   └── package.json
-
 │
-
 └── README.md
 
-How to Run
-Backend
+## How to Run
 
-Open terminal:
+### Backend
 
+Open a terminal:
+
+bash
 cd backend
 npm install
 node server.js
 
-Backend runs at:
-
 http://localhost:5000
-Frontend
+
+### Frontend
 
 Open another terminal:
 
@@ -122,32 +104,56 @@ Frontend runs at:
 
 http://localhost:3000
 
-Database
+# Database
 
 Database used:
 
-MySQL
+# MySQL
 
-Database name:
+Local database name:
 
 products_db
 
-Main tables:
+# Main tables:
 
-products
-orders
-stock
-users
-login_users
+-products
+-orders
+-stock
+-users
+-login_users
 
-Authentication
+# Authentication
 
 The application uses:
 
-JWT for authentication
-bcryptjs for password hashing
-Role-based authorization
+-JWT for authentication
+-bcryptjs for password hashing
+-Role-based authorization
 
-Developer
+## Deployment
+
+# Frontend
+
+Deployed using Vercel:
+
+https://b2b-order-management-drab.vercel.app
+
+# Backend
+
+Deployed using Render:
+
+https://b2b-order-management-2.onrender.com
+
+# Database
+
+MySQL database deployed using Aiven.
+
+# GitHub Repository
+
+https://github.com/gakashyadav77-programer/b2b-order-management
+
+# Developer
+
 Akash Yadav
+
 Full Stack Development Intern
